@@ -1,5 +1,6 @@
 package com.example.texteditor;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +65,34 @@ public class MainActivity extends Activity {
 			}
 		});
 		
+		fileListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+				String filename = savedFiles[position];
+				String content = null;
+				
+				FileInputStream fis;
+				try {
+					fis = openFileInput(savedFiles[position]);
+					byte[] contentArray = new byte[fis.available()];
+					while (fis.read(contentArray) != -1) {
+						content = new String(contentArray);
+					}
+
+					filenameEditText.setText(filename);
+					contentEditText.setText(content);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		
 		showSavedFiles();
 	}
 
@@ -70,6 +101,7 @@ public class MainActivity extends Activity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, savedFiles);
 		
 		fileListView.setAdapter(adapter);
+		
 		
 	}
 }
