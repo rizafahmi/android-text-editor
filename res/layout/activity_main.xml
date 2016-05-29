@@ -5,8 +5,55 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Text Editor"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/filenameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="31dp"
+        android:ems="10"
+        android:hint="Filename" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/contentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/filenameEditText"
+        android:layout_marginTop="27dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Content of the file"
+        android:inputType="textMultiLine"
+        android:minLines="3" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="Save" />
+
+    <ListView
+        android:id="@+id/fileListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/saveButton" >
+    </ListView>
 
 </RelativeLayout>
